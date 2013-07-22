@@ -1,0 +1,13 @@
+<div id="content_left">
+	<div id="content_left_inner">
+		<h1>ALL TOPICS</h1>
+		<%= render :partial => 'list_topics', :locals => {:topics => @topics} %>
+	</div>
+</div>
+
+<div id="content_right">
+	<div id="content_right_inner">
+    <%= render partial: 'recent', locals: {recent: @recent_topic} %>
+	</div>
+</div>
+

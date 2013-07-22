@@ -1,0 +1,12 @@
+<ul id="topics">
+  <% topics.each do |topic| %>
+    <li>
+      <span class="upvote <%= add_style_to_upvoted(topic) %>">
+      <%= link_to '^', upvote_path(topic), method: 'post', remote: true %>
+      </span>
+
+      <span class='upvote_count'><%= topic.upvotes_count %></span>
+      &mdash; <%= link_to truncate(topic.title), topic_path(topic) %>
+      <span class='author'><em>by <%= topic.anonymous? ? "Anonymous" : link_to(topic.user.name, user_path(topic.user))%></em></span><%= time_ago_in_words(topic.created_at) %> ago </li>
+  <% end %>
+</ul>

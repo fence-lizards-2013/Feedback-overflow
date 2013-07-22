@@ -1,0 +1,69 @@
+<div id="profile_wrapper">
+
+ <!-- INFORMATION SECTION -->
+ <section class='information_section'>
+  <div class="info_box">
+
+    <div class="avatar_container">
+      <%= image_tag avatar_url(@user), :alt => 'avatar', :id => 'avatar' %>
+    </div> <!-- end div avatar_cotnainer -->
+
+    <div class="user_info">
+     <p><strong>Name:</strong> <%= @user.name %></p>
+     <% if @user.socrates_auth? %>
+     <p><strong>Cohort:</strong> <%= @user.cohort.name %></p>
+     <p><strong>Status:</strong> <%= @user.cohort.status %></p>
+     <p><strong>Location:</strong> <%= @user.cohort.location %></p>
+     <% end %>
+   </div> <!-- end user_info -->
+
+   <div class="influence_box">
+     <p><%= @user.upvotes.empty? ? "0" : @user.influence %></p>
+     <p>Influence</p>
+   </div> <!-- end influence_score -->
+
+
+
+
+   <div id="stats_box">
+
+
+    <div class="topics_stats">
+      <p><%= @user.topic_stats %></p>
+      <strong><%= link_to determine_plural(@user.topic_stats, 'Topic'), user_topics_path %></strong>
+    </div> <!-- end topics_stats -->
+
+    <div class="comments_stats">
+      <p><%= @user.comment_stats %></p>
+      <strong><%= link_to determine_plural(@user.comment_stats, 'Comment'), user_comments_path %></strong>
+    </div> <!-- end comments_stats -->
+
+
+  </div><!-- end stats_box -->
+
+  <div class="edit_profile">
+    <%= link_to 'Edit Profile', edit_user_path(@user) if @user.authorize_user(current_user) %>
+  </div> <!-- end edit_profile -->
+
+
+
+</div> <!-- end info_box -->
+</section> <!-- end information_section -->
+
+
+<!-- USER TOPIC SECTION -->
+<section id="user_topics_section">
+  <div class="topics_box">
+  <% if @user.topics.empty? %>
+  <h3><%= @user.name.upcase %> HAS NO TOPICS YET</h3>
+  <% else %>
+    <h2><%= @user.name.upcase %>'S MOST INFLUENTIAL TOPICS</h2>
+    <div class="topics_list">
+      <%= render :partial => 'topics/list_topics', :locals => {:topics => non_anonymous_topics(@topics)} %>
+    </div>
+  <% end %><!-- end topics_list -->
+  </div> <!-- end topics_box -->
+
+</section> <!-- end user_topics section -->
+
+</div>

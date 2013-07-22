@@ -1,0 +1,81 @@
+require 'rubygems'
+require 'nokogiri'
+require 'mechanize'
+require 'open-uri'
+require 'debugger'
+
+class SocratesScrapper
+  def initialize agent, url
+    @agent = agent
+    @page = load_socrates_page(url)
+  end
+
+  def load_socrates_page url
+    @agent.get(url)
+  end
+
+  def submit_form
+    form = @page.form
+    form.email = ENV['SCRAPPER_EMAIL']
+    form.password = ENV['SCRAPPER_PASSWORD']
+    form.submit
+  end
+
+  def go_to_cohorts_path id
+    @agent.get("http://socrates.devbootcamp.com/cohorts/#{id}")
+  end
+
+
+  def scrape_cohort_name page
+    page.search('h1').text.delete("\n")
+  end
+
+  def scrape_cohort_page page
+    labels = [:location, :status, :email]
+    attributes = page.search('.muted').text.split("\n").reject(&:empty?)
+    Hash[labels.zip(attributes)]
+  end
+
+  def save_to_database cohort
+    Cohort.create(cohort)
+  end
+
+  def scrape_cohort id
+
+    page = go_to_cohorts_path(id)
+    attributes = scrape_cohort_page(page)
+    cohort = {
+                name: scrape_cohort_name(page),
+                location: attributes[:location],
+                status: attributes[:status],
+                email: attributes[:email],
+                cohort_id: id
+    }
+    save_to_database(cohort)
+  end
+
+  def start!
+    submit_form
+    1.upto(20) do |cohort_id|
+      begin
+        scrape_cohort(cohort_id)
+      rescue
+        next
+      end
+    end
+  end
+end
+
+# 1. Set Url
+url = 'http://socrates.devbootcamp.com/login'
+
+agent = Mechanize.new
+
+scrapper = SocratesScrapper.new(agent, url)
+scrapper.start!
+
+
+
+
+
+

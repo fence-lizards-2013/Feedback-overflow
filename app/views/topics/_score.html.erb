@@ -1,0 +1,33 @@
+<div class="metafeedback">
+  
+  <h2>METAFEEDBACK</h2>
+
+  <div id="score">
+    <% if signed_in? %>
+      <% if current_user.has_scored?(@topic) %>
+        <div id="existing_score">
+          <%= render partial: "scores/completed", locals: {score: @score} %>
+        </div>
+      <% else %>
+
+    <div id="create_score">
+      <h3>ADD SCORE</h3>
+      <%= form_for @score, :remote => true, :data => {topic_id: @topic.id} do |f| %>
+      <%= f.hidden_field :topic_id, :value => @topic.id %>
+      This feedback is specific: <br><%= f.select :specific, options_for_select([['---', nil], ['Strongly Disagree', '1'], ['Disagree', '2'], ['Neutral', '3'], ['Agree', '4'], ['Strongly Agree', '5']]) %><br>
+      This feedback is actionable: <br><%= f.select :actionable, options_for_select([['---', nil], ['Strongly Disagree', '1'], ['Disagree', '2'], ['Neutral', '3'], ['Agree', '4'], ['Strongly Agree', '5']]) %><br>
+
+      This feedback is kind: <br><%= f.select :kind, options_for_select([['---', nil], ['Strongly Disagree', '1'], ['Disagree', '2'], ['Neutral', '3'], ['Agree', '4'], ['Strongly Agree', '5']]) %><br>
+      <%= f.submit "Submit" %>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+  <% end %>
+
+  <h3>STATISTICS</h3>
+  
+  <div id='stats'>
+    <%= render partial: "chart", locals: {graph: @graph} %>
+  </div>
+</div>

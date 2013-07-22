@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Feedback Overflow</title>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+  <div id="wrapper_header"> <!-- begin header -->
+
+    <div id="header_left">
+      <%= link_to image_tag('/assets/logo_fo.png', :alt => "Feedback Overflow", :id => 'img_header'), root_path %>
+    </div>
+
+    <div id="header_right">
+      <ul>
+       <% if signed_in? %>
+         <li><%= link_to 'LOGOUT', logout_path, method: 'delete'  %></li>
+         <li><%= link_to 'CREATE TOPIC',new_topic_path  %></li>
+         <li><%= link_to 'PROFILE', user_path(current_user)  %></li>
+       <% else %>
+         <li><%= link_to 'SIGN UP', signup_path  %></li>
+         <li><%= link_to 'LOGIN', login_path  %></li>
+         <li><%= link_to 'LOGIN W/ SOCRATES', oauth_path %></li>
+       <% end %>
+      </ul>
+    </div>
+
+  </div> <!-- end header -->
+
+
+  <div id="wrapper_content"> <!-- begin content -->
+    <div id="content">
+      <%= yield %>
+    </div>
+  </div> <!-- end content -->
+
+  <div id="wrapper_footer"> <!-- begin footer -->
+    <div id="footer">
+      <div id="footer_left">
+        <h3>FEEDBACK OVERFLOW</h3>
+        <ul>
+          <% if signed_in? %>
+           <li>&raquo; <%= link_to 'Logout', logout_path, method: 'delete'  %></li>
+           <li>&raquo; <%= link_to 'Create Topic',new_topic_path  %></li>
+           <li>&raquo; <%= link_to 'Profile', user_path(current_user)  %></li>
+         <% else %>
+           <li>&raquo; <%= link_to 'Sign Up', signup_path  %></li>
+           <li>&raquo; <%= link_to 'Login', login_path  %></li>
+           <li>&raquo; <%= link_to 'Login w/ Socrates', oauth_path %></li>
+         <% end %>
+        </ul>
+      </div>
+
+      <div id="footer_right">
+        <h3>ABOUT THIS SITE</h3>
+        <%= link_to 'Feedback Overflow', root_path %> was built in the summer of 2013 at <%= link_to 'Dev Bootcamp', 'http://www.devbootcamp.com' %> in San Francisco, California by <%= link_to 'Dean Tambling', 'http://www.linkedin.com/pub/dean-tambling/9/6a2/805' %>, <%= link_to 'Nicholas Wargnier', 'http://www.linkedin.com/pub/nicholas-wargnier/56/424/971' %>, and <%= link_to 'Ryan Tong', 'http://www.linkedin.com/in/rttong' %>. It was created with the overarching goal of making Dev Bootcamp a better place for students to learn.
+
+        <p>Technologies employed in the creation of Feedback Overflow include JavaScript, Ruby on Rails, SASS, and HTML5.</p>
+      </div>
+    </div>
+  </div> <!-- end footer -->
+
+  </body>
+</html>

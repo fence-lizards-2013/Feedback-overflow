@@ -1,0 +1,29 @@
+ <div id="content_left">
+  <div id="content_left_inner">
+    <h1><%= @topic.title %></h1>
+    
+    <span class="upvote <%= add_style_to_upvoted(@topic) %>">
+    <%= link_to '^', upvote_path(@topic), method: 'post', remote: true %>
+    </span>
+
+    <span class='upvote_count'><%= @topic.upvotes_count %></span>
+
+    <%= link_to 'Edit', edit_topic_path(@topic) if @topic.created_by?(current_user) %>
+
+    <p><%= @topic.content %></p>
+
+
+    <h3>Comments</h3>
+    <%= render :partial => 'comments/comment_list', :locals => {:comments => @topic.comments} %>
+
+    <strong>Add Comment</strong>
+    <%= render 'comments/comment' %>
+  </div>
+</div>
+
+
+<div id="content_right" >
+  <div id="content_right_inner">
+    <%= render 'score' %>
+  </div>
+</div>

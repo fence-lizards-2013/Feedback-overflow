@@ -1,0 +1,4 @@
+
+  <%= high_chart("chart", graph) do |c| %>
+  <%= raw "options.tooltip.formatter = function() {return this.x+': ' + this.y}" %>
+  <% end %>

@@ -1,0 +1,84 @@
+/* PAGE STYLES */
+
+body {
+  margin:0;
+  padding:0;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color:#333;
+  background-image: url('/assets/page_bg.jpg');
+  background-repeat: no-repeat;
+  background-attachment:fixed;
+  background-position:center top;
+
+  a {
+    color:#0e9896;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #47cac8;
+    text-decoration: none;
+    -webkit-transition:0.5s;
+    transition:0.5s;
+  }
+
+  h1 {
+    padding: 5px;
+    font: 30px Avenir;
+    color: #333;
+    background-image: url('/assets/h1_bg.png');
+    background-repeat: no-repeat;
+  }
+
+  h2 {
+    padding: 0;
+    font: 25px Avenir;
+    /*color: #333;*/
+    color: #937ef5;
+  }
+
+  h3 {
+    padding: 0;
+    font: 20px Avenir;
+    color: #0e9896;
+  }
+}
+
+.error {
+  font-weight: bold;
+  color: #ff0;
+}
+
+.scores{
+  text-align: center;
+}
+
+.metafeedback{
+ border-radius: 8px;
+ padding: 0 10px 10px 20px;
+ margin-top: 20px;
+}
+
+#recent{
+  font-size: 1.4em;
+  font-style: italic;
+}
+
+#author{
+  font-size: 0.8em;
+  margin-left: 15%;
+}
+
+// mixin for bullet proof font declaration syntax
+
+@font-face {
+  font-family: 'Iconminia';
+  src: url(font-path('iconminia.eot') + "?#iefix") format('embedded-opentype'),
+  url(font-path('iconminia.woff')) format('woff'),
+  url(font-path('iconminia.ttf'))  format('truetype'),
+  url(font-path('iconminia.svg') + "#iconminia") format('svg');
+}
+
+
+

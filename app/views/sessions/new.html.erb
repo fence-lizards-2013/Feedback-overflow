@@ -1,0 +1,46 @@
+<div id="content_left">
+	<div id="content_left_inner">
+		<% provide(:title, "Login") %>
+		<h1>LOGIN</h1>
+
+		<p>Enter your e-mail address and password to login.</p>
+
+		<% if flash[:error] %>
+		  <%= flash[:error] %><br><br>
+		<% end %>
+
+		<%= form_for(:session, url: sessions_path) do |f| %>
+		  <%= f.label :email, "E-mail" %><br>
+		  <%= f.text_field :email %><br><br>
+
+		  <%= f.label :password, "Password" %> <br>
+		  <%= f.password_field :password %><br><br>
+
+		  <%= f.submit("Clear Form", { :class => 'button', :type => "reset" }) %>
+		  <%= f.submit("Submit", { :class => 'button', :type => "submit" }) %>
+		<% end %>
+
+		<p>New user? <%= link_to "Sign up now!", new_user_path %></p>
+	</div>
+</div>
+
+<div id="content_right">
+	<div id="content_right_inner">
+		<h3>LEAVING GOOD FEEDBACK</h3>
+		<p>Make sure your feedback is...</p>
+		<dl>
+			<dt><strong>Specific</strong></dt>
+			<dd>
+				Avoid vague or general feedback. Don't make people read between the lines to figure out what you mean.
+			</dd>
+			<dt><strong>Actionable</strong></dt>
+			<dd>
+				Someone should be able to act on your feedback. If someone can't do anything to address your feedback, then your feedback might actually be whining or gossip, so be careful of that.
+			</dd>
+			<dt><strong>Kind</strong></dt>
+			<dd>
+				<quote><em>"There's only one rule that I know of, babies &mdash; God damn it, you've got to be kind."</em></quote>
+			</dd>
+	</div>
+</div>
+

@@ -1,0 +1,28 @@
+<div id="content_left">
+	<div id="content_left_inner">
+		<h1><%= @user.name.upcase %>'S TOPICS</h1>
+
+		<%= render :partial => 'topics/list_topics', :locals => {:topics => non_anonymous_topics(@user.topics)} %>
+	</div>
+</div>
+
+<div id="content_right">
+	<div id="content_right_inner">
+		<h3>LEAVING GOOD FEEDBACK</h3>
+		<p>Make sure your feedback is...</p>
+		<dl>
+			<dt><strong>Specific</strong></dt>
+			<dd>
+				Avoid vague or general feedback. Don't make people read between the lines to figure out what you mean.
+			</dd>
+			<dt><strong>Actionable</strong></dt>
+			<dd>
+				Someone should be able to act on your feedback. If someone can't do anything to address your feedback, then your feedback might actually be whining or gossip, so be careful of that.
+			</dd>
+			<dt><strong>Kind</strong></dt>
+			<dd>
+				<quote><em>"There's only one rule that I know of, babies &mdash; God damn it, you've got to be kind."</em></quote>
+			</dd>
+	</div>
+</div>
+

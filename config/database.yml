@@ -1,0 +1,16 @@
+common: &common
+  adapter: postgresql
+  host: localhost
+  timeout: 5000
+
+development:
+  <<: *common
+  database: feedback_overflow_dev
+
+test:
+  <<: *common
+  database: feedback_overflow_test
+
+production:
+  <<: *common
+  database: feedback_overflow

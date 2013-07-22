@@ -1,0 +1,5 @@
+<% comments.each do |comment| %>
+  <p><%= comment.content %> &mdash; <%= link_to comment.user.name, user_path(comment.user) %>
+  <%= render :partial=> 'comments/comment_links', :locals => {:comment => comment}%></p>
+  <hr class="separator">
+<% end %>

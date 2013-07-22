@@ -1,0 +1,6 @@
+<%= form_for @comment do |f| %>
+  <%= f.text_area :content %><br><br>
+  <%= f.hidden_field :topic_id, value: @topic.id %>
+  <%= f.submit("Clear Form", { :class => "button", :type => "reset" }) %>
+	<%= f.submit("Submit", { :class => "button", :type => "submit" }) %>
+<% end %>
